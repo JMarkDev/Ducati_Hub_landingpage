@@ -1,0 +1,451 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- saved from url=(0055)https://cs.appstate.edu/~dap/classes/2490/chapter3.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Chapter 3</title>
+
+<style type="text/css">@font-face { font-family: Roboto; src: url("chrome-extension://mcgbeeipkmelnpldkobichboakdfaeon/css/Roboto-Regular.ttf"); }</style></head>
+<body>
+<table width="100%" style="border-width:medium; border-style:groove; border-color:#DDDDDD;">
+  <tbody><tr>
+    <td style="width: 1.5in; background-color: LightSteelBlue; text-align: center"><img src="./Regular expression_files/cover.jpg" width="100"></td>
+    <td style="background-color: LightSteelBlue; padding: .2cm;"><h1>Chapter
+        3<br>
+        Regular Languages and Regular Grammars</h1>
+    </td>
+  </tr>
+  <tr>
+    <td style="background-color: LightSteelBlue; vertical-align: top; padding: .2cm;">
+      <ul>
+        <li><a href="https://cs.appstate.edu/~dap/classes/2490/chapter1.html">Chapter 1</a></li>
+        <li><a href="https://cs.appstate.edu/~dap/classes/2490/chapter2.html">Chapter 2</a></li>
+        <li><a href="https://cs.appstate.edu/~dap/classes/2490/chapter3.html">Chapter 3</a></li>
+        <li><a href="https://cs.appstate.edu/~dap/classes/2490/chapter4.html">Chapter 4</a></li>
+        <li><a href="https://cs.appstate.edu/~dap/classes/2490/chapter5.html">Chapter 5</a></li>
+        <li><a href="https://cs.appstate.edu/~dap/classes/2490/chapter6.html">Chapter 6</a></li>
+        <li><a href="https://cs.appstate.edu/~dap/classes/2490/chapter7.html">Chapter 7</a></li>
+        <li><a href="https://cs.appstate.edu/~dap/classes/2490/chapter8.html">Chapter 8</a></li>
+        <li><a href="https://cs.appstate.edu/~dap/classes/2490/chapter9.html">Chapter 9</a></li>
+        <li><a href="https://cs.appstate.edu/~dap/classes/2490/chapter10.html">Chapter 10</a></li>
+        <li><a href="https://cs.appstate.edu/~dap/classes/2490/chapter11.html">Chapter 11</a></li>
+        <li><a href="https://cs.appstate.edu/~dap/classes/2490/chapter12.html">Chapter 12</a></li>
+        <li><a href="https://cs.appstate.edu/~dap/classes/2490/chapter13.html">Chapter 13</a></li>
+        <li><a href="https://cs.appstate.edu/~dap/classes/2490/chapter14.html">Chapter 14</a></li>
+      </ul>
+    </td>
+    <td style="background-color: #EEEEEE; padding: .2cm;">
+      <div style="overflow: auto">
+      <p>For a plain version of these notes that is more conducive to printing,
+        use <a href="https://cs.appstate.edu/~dap/classes/2490/chapter3print.html">this link</a>.</p>
+      <p>Our first definition of a regular language says that a language is regular
+        if there is a finite accepter (either deterministic or nondeterministic)
+        for it. There are alternative ways of defining the concept of a regular
+        language and this chapter describes those ways.</p>
+      <h2>3.1 Regular Expressions</h2>
+      <p>We can define a regular language using an expression called a <strong>regular
+          expression</strong>. The symbols used in a regular expression are the
+          symbols of our alphabet, parentheses, +, and *. The plus sign is used
+          for "or" and the star is used as we've used it before, to
+          signify the inclusion of a part of the expression 0 or more times.
+          There is also an invisible symbol that indicates concatenation. We
+          just write two symbols next to each other to say that we want them
+          concatenated. Here is a formal definition of regular expressions.</p>
+      <h3>Formal Definition of a Regular Expression</h3>
+      <hr align="left" width="50%">
+      <h3>Definition 3.1</h3>
+      <p>Let &#931; be a given alphabet. Then
+      </p><ol>
+        <li>&#955; and all the symbols of &#931; are regular expressions.
+          These are called primitive regular expressions.</li>
+        <li>If r<sub>1</sub> and r<sub>2</sub> are regular expressions, so are
+          r<sub>1</sub> + r<sub>2</sub>, r<sub>1</sub>r<sub>2</sub>, r<sub>1</sub>*,
+          and (r<sub>1</sub>).</li>
+        <li>A string is a regular expression if and only if it can be derived
+          from the primtive regular expressions by a finite number of applications
+          of the rules in (2).</li>
+      </ol>
+      <hr align="left" width="50%">
+      <h3>Languages Associated with Regular Expressions</h3>
+      <p>If <em>r</em> is a regular expression, we define <em>L(r)</em> to be
+        the language associated with <em>r</em>.</p>
+      <hr align="left" width="50%">
+      <h3>Definition 3.2</h3>
+      <p>The language <em>L(r)</em> denoted by any regular expression <em>r</em> is
+        defined by the following rules.
+      </p><ol>
+        <li>&#955; is a regular expression denoting {&#955;}.</li>
+        <li>For every symbol <em>a</em> &#8712; &#931;, <em>a</em> is a regular
+          expression denoting {<em>a</em>}.</li>
+        <li>If r<sub>1</sub> and r<sub>2</sub> are regular expressions, then
+          <ol>
+            <li><em>L(r<sub>1</sub> + r<sub>2</sub> ) = L(r<sub>1</sub> ) &#8746; L(r<sub>2</sub> ),</em></li>
+            <li><em>L(r<sub>1</sub> r<sub>2</sub> ) = L(r<sub>1</sub> ) L(r<sub>2</sub> ),</em></li>
+            <li><em>L((r<sub>1</sub> )) = L(r<sub>1</sub> ),</em></li>
+            <li><em>L(r<sub>1</sub>* ) = (L(r<sub>1</sub> ))*.</em></li>
+          </ol>
+        </li>
+      </ol>
+      <hr align="left" width="50%">
+      <p>The above definition of regular expression gives us no way to express
+        the notion of an "empty" regular expression that generates
+        no strings at all. For that, we use the empty set symbol. Dr. Linz allows
+        the empty set symbol to be used with other symbols to make up part of
+        a regular expression, but your instructor prefers to reserve the empty
+        set symbol for use in only one way. She will use the empty set symbol
+        as the entire regular expression to specify the empty language.</p>
+      <p>There are some precedence rules that help us interpret a regular expression
+        correctly. Here are the three operators (star, concatenation, and or)
+        in <strong>decreasing precedence order</strong>.</p>
+      <table width="70%" border="2" cellspacing="0" cellpadding="5" align="center">
+        <tbody><tr>
+          <td>Name of the operator</td>
+          <td>Symbol</td>
+          <td>Binary or Unary?</td>
+        </tr>
+        <tr>
+          <td>star</td>
+          <td>*</td>
+          <td>unary</td>
+        </tr>
+        <tr>
+          <td>concatenation</td>
+          <td>juxtaposition</td>
+          <td>binary</td>
+        </tr>
+        <tr>
+          <td>or</td>
+          <td>+</td>
+          <td>binary</td>
+        </tr>
+      </tbody></table>
+      <p>&nbsp;</p>
+      <p>An expression such as a + ba* is interpreted as (a + (b((a)*))) because
+        of precedence. The star has highest precedence so it applies only to
+        the a. Concatenation has higher precedence than or, so b is concatenated
+        with a* and then that subexpression ba* is or'ed with the left a. </p>
+      <p>Here are some examples of regular expressions and a description of each
+        expression's language. Think carefully about each one and be sure you
+        understand it.</p>
+      <table width="100%" border="2" cellspacing="0" cellpadding="5">
+        <tbody><tr>
+          <td width="25%">Expression</td>
+          <td width="10%">Alphabet</td>
+          <td width="32%">A listing of the strings generated by the expression</td>
+          <td width="33%">Language description</td>
+        </tr>
+        <tr>
+          <td>a*</td>
+          <td>{a}</td>
+          <td>{&#955;, a, aa, aaa, ...}</td>
+          <td>strings made out of zero or more a's</td>
+        </tr>
+        <tr>
+          <td>(aa + bb)</td>
+          <td>{a, b}</td>
+          <td>{aa, bb}</td>
+          <td>the two strings aa and bb</td>
+        </tr>
+        <tr>
+          <td>(a + b)*</td>
+          <td>{a, b}</td>
+          <td>{&#955;, a, b, aa, ab, ba, bb, ...}</td>
+          <td>any string made out of a's and b's</td>
+        </tr>
+        <tr>
+          <td>(b + a)*</td>
+          <td>{a, b}</td>
+          <td>{&#955;, a, b, aa, ab, ba, bb, ...}</td>
+          <td>any string made out of a's and b's</td>
+        </tr>
+        <tr>
+          <td>(aa + bb)*</td>
+          <td>{a, b}</td>
+          <td>{&#955;, aa, bb, aaaa, aabb, bbaa, bbbb, ...}</td>
+          <td>strings consisting of pairs of a's and/or pairs of b's concatenated
+            together</td>
+        </tr>
+        <tr>
+          <td>a + ba*</td>
+          <td>{a, b}</td>
+          <td>{a, b, ba, baa, baaa, ...}</td>
+          <td>either the string a or strings containing one b followed by zero
+            or more a's</td>
+        </tr>
+        <tr>
+          <td>(b*a b*a b*)* + b*</td>
+          <td>{a, b}</td>
+          <td>{&#955;, aa, bb, aab, aba, baa, bbb, aaaa, aabb, abab, abba,
+            baab, baba, bbaa, bbbb, ...}</td>
+          <td>strings containing an even number of a's</td>
+        </tr>
+        <tr>
+          <td>(a + b)*(aa + bb)</td>
+          <td>{a, b}</td>
+          <td>{aa, bb, aaa, abb, baa, bbb, aaaa, aabb, abaa, abbb, baaa, babb,
+            bbaa, bbbb, ...}</td>
+          <td>strings that end with aa or bb</td>
+        </tr>
+        <tr>
+          <td>(a + b)* bb (a + b)*</td>
+          <td>{a, b}</td>
+          <td>{bb, abb, bba, bbb, aabb, abba, abbb, babb, bbaa, bbab, bbba, bbbb,
+            ...}</td>
+          <td>strings that contain bb</td>
+        </tr>
+        <tr>
+          <td>a (a + b)* b</td>
+          <td>{a, b}</td>
+          <td>{ab, aab, abb, aaab, aabb, abab, abbb, ...}</td>
+          <td>strings that start with a and end with b</td>
+        </tr>
+        <tr>
+          <td>(aa)*(bb)*b</td>
+          <td>{a, b}</td>
+          <td>{b, aab, bbb, aaaab, aabbb, bbbbb, ...}</td>
+          <td>strings that contain an even number of a's followed by an odd number
+            of b's</td>
+        </tr>
+        <tr>
+          <td>(b + ab)* (a + &#955;)</td>
+          <td>{a, b}</td>
+          <td>{&#955;, a, b, ab, ba, bb, aba, abb, bab, bba, bbb, ...}</td>
+          <td>strings that do not contain aa</td>
+        </tr>
+        <tr>
+          <td>(aa+bb+(ab+ba)(aa+bb)*(ab+ba))*</td>
+          <td>{a, b}</td>
+          <td>{&#955;, aa, bb, aaaa, aabb, abab, abba, baab, baba, bbaa, bbbb,
+            ...}</td>
+          <td>strings that contain an even number of a's and an even number of
+            b's, a.k.a. EVEN-EVEN</td>
+        </tr>
+      </tbody></table>
+      <p>That last expression for EVEN-EVEN deserves some discussion. Let's look
+        at it with some spaces between the various components so we can understand
+        it more easily.</p>
+      <p align="center"> ( aa + bb + (ab + ba) (aa + bb)* (ab + ba) )*</p>
+      <p>The whole expression consists of a starred set of parentheses that contain
+        three subexpressions, aa, bb, and (ab + ba) (aa + bb)* (ab + ba). This
+        last subexpression itself has three parts. In order to put a string together
+        using those three parts, select either ab or ba from the first part,
+        then select zero or more double letters, then select either ab or ba.
+        A string put together from (ab + ba) (aa + bb)* (ab + ba) will contain
+        an even number of a's and an even number of b's, and will be at least
+        four letters long with neither the first two nor the last two letters
+        being the same. </p>
+      <p>Now let's see how we could use that large expression for EVEN-EVEN to
+        generate the string abbbbbbabbaaabaaba. This string contains 8 a's and
+        10 b's, so the expression should be able to generate it. Since the first
+        two letters in the desired string are different, we have to start with
+        the subexpression (ab + ba) (aa + bb)* (ab + ba). We take an ab from
+        the first set of parentheses. If the next two letters in the string were
+        different we would take 0 copies of aa or bb from the middle set of parentheses.
+        However, the next two letters are both b's, as are letters 5 and 6. So
+        we use (aa + bb)* to generate them, and then we take ba from the third
+        set of parentheses and that gets us through the first 8 letters of the
+        desired string. The next two letters are the same, bb, as are the following
+        two, aa. So we use bb and then aa from the big three-part regular expression.
+        Then we come to the portion of the string, abaaba. We make this part
+        from (ab + ba)(aa + bb)*(ab + ba). If you think of the entire regular
+        expression for EVEN-EVEN as a bag containing infinitely many aa's, bb's,
+        and (ab + ba)(aa + bb)*(ab + ba)'s, we have to reach into the bag four
+        times to make our desired string.</p>
+      <p>There is rarely just one regular expression for a given language. We
+        say that two regular expressions are equivalent if they generate the
+        exact same set of strings. For example, (a + b)* and (a*b*)* are equivalent.
+        However, (a + b)* is not equivalent to a*b*. The expression a*b* generates
+        strings in which all the a's come before all the b's, whereas (a + b)*
+        can generate any string made out of a's and b's.</p>
+      <h2>3.2 Connection Between Regular Expressions and Regular Languages</h2>
+      <p>We have defined a regular language as one for which you can draw a finite
+        accepter. It is also true to say that a regular language is one for which
+        you can write a regular expression. We can prove this by showing that
+        there is a finite accepter for every regular expression and a regular
+        expression for every finite accepter. We say that the regular expression
+        generates the same strings as the finite accepter accepts. </p>
+      <p>We have to show this equivalence between finite accepters and regular
+        expressions in both directions and we will have two algorithms that do
+        the jobs. Both algorithms work with nondeterministic finite accepters,
+        but remember that we have the ability to convert nfa's to dfa's whenever
+        that is our desire. Dr. Linz does formal proofs of the correctness of
+        these algorithms (actually his algorithms are slightly different but
+        not enough to make the proofs hard to follow) in our textbook. </p>
+      <h3>Regular Expression to Nondeterministic Finite Accepter (rex-to-nfa)</h3>
+      <p><b>Given:</b>&nbsp;a regular expression that generates language L </p>
+      <p> <b>Output:</b>&nbsp;a nondeterministic finite accepter that accepts
+        language L
+      </p><ol>
+        <li>Draw a start state and an accept state and connect them with an edge
+          labeled with the regular expression given.</li>
+        <br>
+        <br>
+        <li>Recursively apply the following rules until each edge of the finite
+          automaton contains a single character of the alphabet or &#955;.
+          Apply the rules to an edge in the order shown (reverse precedence order): <br>
+          <br>
+          <ol type="a">
+            <li>If an edge is labeled with an expression that consists of two
+              or more subexpressions "or-ed" together, add new edges so that
+              each subexpression is on an edge of its own. However, if each subexpression
+              consists of a single character of the alphabet, you may simply
+              change the +'s in the expression into commas.
+              <p> <img src="./Regular expression_files/ch7_4.jpg"> </p>
+            </li>
+            <li>If an edge is labeled with an expression that consists of two
+              or more subexpressions concatenated together, add intermediate
+              states and edges to put each subexpression on its own edge.
+              <p> <img src="./Regular expression_files/ch7_5.jpg"></p>
+            </li>
+            <li>If an edge (m,n) is labeled with the star-closure of an expression,
+              add intermediate state o and &#955;-transitions (m,o) and (o,n).
+              Remove the star from the expression and use the starless expression
+              as the label on a new self-loop (o,o).
+              <p> <img src="./Regular expression_files/ch7_6.jpg"></p>
+            </li>
+          </ol>
+      </li></ol>
+      <h3>Nondeterministic Finite Accepter to Regular Expression (nfa-to-rex)</h3>
+      <p><b>Given:</b>&nbsp;a finite automaton that accepts language L </p>
+      <p> <b>Output:</b>&nbsp;a regular expression that generates language L</p>
+      <ol>
+        <li>Add a new start state and add an edge labeled &#955; from this
+          new start state to the original start state. The original start state
+          is no longer a start state.</li>
+        <br>
+        <br>
+        <li>Add a new accept state and &#955;-transitions from the original
+          accept states to this new accept state. The original accept states
+          are no longer accept states. The new accept state must be different
+          from the new start state.</li>
+        <br>
+        <br>
+        <li>Combine any edges that exit and enter the same states by or-ing their
+          expressions: <img src="./Regular expression_files/ch7_3.jpg" alt="Combined edges."></li>
+        <br>
+        <br>
+        <li>Eliminate any states that have no edges going out to other states
+          (trap states). Eliminate any edges to these states as well.</li>
+        <br>
+        <br>
+        <li>Repeat until the only remaining states are the start state and the
+          accept state:
+          <p> Select a state s to be eliminated. For each entering edge (r,s)
+            and for each leaving edge (s,t) create a bypass edge (r,t). If there
+            is a self-loop (s,s) on state s then label edge (r,t) with the concatenation
+            of the label on (r,s) with the *-closure of the label on (s,s) and
+            with the label on (s,t). Else, label edge (r,t) with the concatenation
+            of the label on (r,s) with the label on (s,t). Eliminate edge (r,s).
+            Once all entering edges to s have been eliminated, eliminate state
+            s and all its leaving edges. Combine any edges that exit and enter
+            the same states as in step 3.</p>
+        </li>
+        <li>Combine all edges from the start state to the accept state as in
+          step 3. The RE on the resulting edge is the output of this algorithm.</li>
+      </ol>
+      <h2>3.3 Regular Grammars</h2>
+      <p>Still another way to define a regular language is to give a certain
+        kind of grammar called a <strong>regular grammar</strong> for it. A grammar
+        is said to be regular if it is either right-linear or left-linear, concepts
+        which we will define next.</p>
+      <h3>Right- and Left-Linear Grammars</h3>
+      <hr align="left" width="50%">
+      <h3>Definition 3.3</h3>
+      <p>A grammar G = (V, T, S, P) is said to be <strong>right-linear</strong> if
+        all productions (rules) are of the form
+      </p><pre>       
+   A  &#8594; xB
+      | x</pre>
+      where A, B &#8712; V, and x &#8712; T*. A grammar is said to be <strong>left-linear</strong> if
+      all productions are of the form
+      <pre>   A  &#8594; Bx
+      | x
+</pre>
+      again where A, B &#8712; V, and x &#8712; T*. A <strong>regular grammar</strong> is
+      one that is either right-linear or left-linear.
+      <hr align="left" width="50%">
+      <p>Note that in a regular grammar, at most one variable appears on the
+        right side of any rule. Furthermore, that variable must consistently
+        be either the first or last symbol on the right side throughout the entire
+        grammar. If a grammar mixes the concepts of right- and left-linearity,
+        it is not a regular grammar.</p>
+      <p>In order to show that regular grammars are yet another way to define
+        regular languages, we need to show the equivalence between some previous
+        way of defining them and regular grammars. We will discuss two algorithms
+        that together show the equivalence of right-linear grammars to nfa's.
+        One algorithm converts an nfa to a right-linear grammar and the other
+        converts a right-linear grammar to an nfa. Our author provides nice
+        proofs of correctness of these algorithms. We will not cover any algorithms
+        that
+        work with
+        left-linear grammars but our author outlines a proof of the theorem that
+        a language is regular if and only if there exists a left-linear grammar
+        for the
+        language. </p>
+      <h3>Nondeterministic Finite Accepter to Right-Linear Grammar (nfa-to-rlg)</h3>
+      <ol>
+        <li>Change the names of the states to capital letters. Name the start
+          state S. The names of the states become the variables of the grammar.
+          The alphabet of the finite accepter is the alphabet of the grammar.</li>
+        <br>
+        <br>
+        <li>Each transition of the machine becomes a production of the grammar
+          like this:<br>
+          <img src="./Regular expression_files/ch13_0.jpg" alt="transition to production" align="left">
+          <pre>
+A &#8594; aB
+B &#8594; aB
+  | bB
+
+</pre>
+        </li>
+        <br>
+        <li>If state X is an accept state, add the production X &#8594; &#955;.</li>
+        <br>
+        <br>
+        <li>List the S productions first, then the others.</li>
+      </ol>
+	  <p>Before we look at the algorithm for producing an accepter from a right-linear
+	    grammar,  it will be useful to define two terms. A <strong>word</strong> is
+	    a string of symbols from the alphabet or &#955;.  A <strong>semiword</strong> is
+	    a word followed by a single variable. In a right-linear grammar, the
+	    right sides of all the rules are either words or semiwords.</p>
+      <h3>Right-Linear Grammar to Nondeterministic Finite Accepter (rlg-to-nfa)</h3>
+      <ol>
+      <li>Draw a state for every variable in the grammar. Make the state for
+        the starting variable be the start state. Then draw one extra state that
+        is an accept state and
+        label
+        it
+        F (provided F is not the name of a variable; in that case, name the accept
+        state anything you want).</li>
+      <br>
+      <br>
+      <li>For any production of the form X &#8594; wY where wY is a semiword,
+        draw a transition from state X to state Y and label it with w. Note that
+        X and Y may be the same state, which means you should draw a self-loop
+        on that state labeled with w.</li>
+      <br>
+      <br>
+      <li>For any production of the form X &#8594; w where w is a word, draw a
+        transition from state X to the accept state F and label it with w.</li>
+      <br>
+      <br>
+	  <li>For any transition labeled w where w contains more than one symbol from the
+	  alphabet, add intermediate states the way we did in the nfa-to-rex algorithm so
+	  that each transition in the machine contains exactly one symbol.</li>
+      </ol>
+      <h3>Summary</h3>
+      <p>We now know several ways to describe a regular language: dfa, nfa, regular
+        expression, and regular grammar. Each of these devices gives a complete
+        and unambiguous definition of a regular language. The author provides
+        the following
+        diagram to show the connections between the various means of defining
+        regular languages provided by our algorithms.</p>
+      <p align="center"><img src="./Regular expression_files/chapter3_1.jpg" alt="regular languages" width="219" height="320"></p>
+
+      </div>
+    </td>
+  </tr>
+</tbody></table>
+
+
+</body></html>
